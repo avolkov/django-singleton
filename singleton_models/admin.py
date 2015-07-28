@@ -30,7 +30,8 @@ class SingletonModelAdmin(admin.ModelAdmin):
 
         info = self.model._meta.app_label, self.model._meta.module_name
 
-        urlpatterns = patterns('',
+        urlpatterns = patterns(
+            '',
             url(r'^history/$',
                 wrap(self.history_view),
                 {'object_id': '1'},
@@ -46,11 +47,13 @@ class SingletonModelAdmin(admin.ModelAdmin):
         """
         Determines the HttpResponse for the change_view stage.
         """
-        opts = obj._meta
 
-        msg = _('%(obj)s was changed successfully.') % {'obj': force_unicode(obj)}
-        if request.POST.has_key("_continue"):
-            self.message_user(request, msg + ' ' + _("You may edit it again below."))
+        msg = _(
+            '%(obj)s was changed successfully.') % {'obj': force_unicode(obj)}
+        if "_continue" in request.POST:
+            self.message_user(
+                request,
+                msg + ' ' + _("You may edit it again below."))
             return HttpResponseRedirect(request.path)
         else:
             self.message_user(request, msg)
