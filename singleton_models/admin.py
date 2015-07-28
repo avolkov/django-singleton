@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.utils.translation import ugettext as _
-from django.utils.encoding import force_unicode
+from django.utils.encoding import force_text
 from django.http import HttpResponseRedirect
 from functools import update_wrapper
 
@@ -49,7 +49,7 @@ class SingletonModelAdmin(admin.ModelAdmin):
         """
 
         msg = _(
-            '%(obj)s was changed successfully.') % {'obj': force_unicode(obj)}
+            '%(obj)s was changed successfully.') % {'obj': force_text(obj)}
         if "_continue" in request.POST:
             self.message_user(
                 request,
