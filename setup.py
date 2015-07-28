@@ -2,7 +2,8 @@
 
 from setuptools import setup, find_packages
 
-setup(name='django-singleton',
+setup(
+    name='django-singleton',
     version='0.2.0',
     description='Reusable singleton models for Django',
     author='Chris Davis',
